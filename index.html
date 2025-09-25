@@ -6,37 +6,225 @@
     <title>Redwan Shahriar Shubho - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #f97316;
+            --primary-dark: #ea580c;
+            --secondary: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
         /* Custom animations */
         .hover-scale {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
         .hover-scale:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 165, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
         }
+        
         .hover-rotate {
             transition: transform 0.3s ease;
         }
+        
         .hover-rotate:hover {
             transform: rotate(5deg);
         }
+        
         .fade-in {
             opacity: 0;
             animation: fadeIn 1s ease-in forwards;
         }
+        
         @keyframes fadeIn {
             to { opacity: 1; }
         }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-icon:hover {
+            transform: translateY(-8px);
+            filter: drop-shadow(0 5px 15px rgba(249, 115, 22, 0.4));
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .timeline-dot {
+            position: relative;
+        }
+        
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            top: 0;
+            left: -10px;
+            z-index: 2;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: #334155;
+            top: 0;
+            left: -1px;
+            z-index: 1;
+        }
+        
+        .hamburger {
+            cursor: pointer;
+            width: 24px;
+            height: 20px;
+            position: relative;
+            transition: all 0.25s ease-in-out;
+        }
+        
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: white;
+            transform: rotate(0);
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+        
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+        
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translateX(6px);
+        }
+        
+        .open .hamburger-middle {
+            opacity: 0;
+        }
+        
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translateX(-6px);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
         html { scroll-behavior: smooth; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .typewriter {
+                font-size: 1.25rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-black text-white font-sans overflow-x-hidden">
+<body class="bg-gradient-to-br from-gray-900 to-black text-white overflow-x-hidden">
     <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 w-full bg-black/90 backdrop-blur-md z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <a href="#home" class="text-xl md:text-2xl font-bold text-orange-500 hover:text-orange-400 transition-colors">Redwan Shahriar Shubho</a>
-            <ul class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-0 text-sm md:text-base">
+    <nav class="fixed top-0 left-0 w-full bg-gray-900/95 backdrop-blur-lg z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl md:text-2xl font-bold gradient-text">Redwan Shahrair Shubho</a>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6 text-sm md:text-base">
+                <li><a href="#about" class="hover:text-orange-500 transition-colors">About</a></li>
+                <li><a href="#skills" class="hover:text-orange-500 transition-colors">Skills</a></li>
+                <li><a href="#projects" class="hover:text-orange-500 transition-colors">Projects</a></li>
+                <li><a href="#education" class="hover:text-orange-500 transition-colors">Education</a></li>
+                <li><a href="#github" class="hover:text-orange-500 transition-colors">GitHub</a></li>
+                <li><a href="#contact" class="hover:text-orange-500 transition-colors">Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden hamburger" id="hamburger">
+                <span class="hamburger-top"></span>
+                <span class="hamburger-middle"></span>
+                <span class="hamburger-bottom"></span>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden bg-gray-800 px-4" id="mobile-menu">
+            <ul class="flex flex-col space-y-4 py-4">
                 <li><a href="#about" class="hover:text-orange-500 transition-colors">About</a></li>
                 <li><a href="#skills" class="hover:text-orange-500 transition-colors">Skills</a></li>
                 <li><a href="#projects" class="hover:text-orange-500 transition-colors">Projects</a></li>
@@ -48,35 +236,66 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 relative overflow-hidden px-4">
-        <div class="text-center z-10 fade-in" style="animation-delay: 0.2s;">
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden px-4 pt-16">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1772&q=80')] opacity-10 bg-cover bg-center"></div>
+        <div class="text-center z-10 max-w-3xl fade-in" style="animation-delay: 0.2s;">
             <img src="img/redwan17s.jpg" alt="Redwan Shahriar Shubho" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-orange-500 hover-scale hover-rotate">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Redwan Shahriar Shubho</h1>
-            <p class="text-lg md:text-xl mb-6">Aspiring Full-Stack Developer & AI Enthusiast | Passionate about real-world tech solutions</p>
+            <div class="h-8 mb-6">
+                <p class="text-lg md:text-xl typewriter">Full-Stack Developer & AI Enthusiast</p>
+            </div>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Passionate about building innovative tech solutions that make a difference in the real world.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#contact" class="px-6 py-3 md:px-8 md:py-4 bg-orange-500 rounded-full text-base md:text-lg font-semibold hover:bg-orange-600 hover-scale">Get in Touch</a>
-                <a href="./Redwan_Shahriar_Shubho_CV.pdf" download class="px-6 py-3 md:px-8 md:py-4 bg-gray-700 rounded-full text-base md:text-lg font-semibold hover:bg-gray-600 hover-scale">Download CV</a>
+                <a href="#contact" class="px-6 py-3 md:px-8 md:py-4 bg-orange-500 rounded-full text-base md:text-lg font-semibold hover:bg-orange-600 hover-scale transition-all">Get in Touch</a>
+                <a href="./Redwan_Shahriar_Shubho_CV.pdf" download class="px-6 py-3 md:px-8 md:py-4 bg-gray-800 rounded-full text-base md:text-lg font-semibold hover:bg-gray-700 hover-scale transition-all border border-gray-700">Download CV</a>
+            </div>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="https://www.linkedin.com/in/redwan-shahriar-shubho-799532240/" target="_blank" class="text-gray-400 hover:text-orange-500 transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://github.com/redwanshahriarshubho" target="_blank" class="text-gray-400 hover:text-orange-500 transition-colors"><i class="fab fa-github text-xl"></i></a>
+                <a href="mailto:redwanshahriarshubho.1789@gmail.com" class="text-gray-400 hover:text-orange-500 transition-colors"><i class="fas fa-envelope text-xl"></i></a>
             </div>
         </div>
-        <div class="absolute inset-0 bg-[url('https://via.placeholder.com/1920x1080?text=Starry+Background')] opacity-20"></div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 md:py-24 bg-gray-900 px-4">
+    <section id="about" class="py-16 md:py-24 bg-gray-900/50 px-4">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">About Me</h2>
-            <p class="text-base md:text-lg leading-relaxed mb-6 fade-in" style="animation-delay: 0.4s;">
-                I’m <strong>Redwan Shahriar Shubho</strong>, a Computer Science and Engineering student at <strong>North South University</strong>, Dhaka, Bangladesh. I’m passionate about leveraging <strong>AI</strong>, <strong>full-stack development</strong>, and <strong>mobile app development</strong> to solve real-world problems. My goal is to build scalable, impactful software solutions that drive innovation.
-            </p>
-            <ul class="list-disc list-inside text-base md:text-lg space-y-2 fade-in" style="animation-delay: 0.6s;">
-                <li>🌟 <strong>Interests</strong>: Artificial Intelligence, Web Development, Mobile Apps, System Design</li>
-                <li>🌱 <strong>Currently Learning</strong>: Flutter, Dart, Python, FastAPI, Cloud Technologies</li>
-                <li>💬 <strong>Ask Me About</strong>: MERN Stack, Flutter, Python, Git, WebSockets, API Development</li>
-                <li>📫 <strong>Email</strong>: <a href="mailto:redwanshahriarshubho.1789@gmail.com" class="text-orange-500 hover:underline">redwanshahriarshubho.1789@gmail.com</a></li>
-                <li>⚡ <strong>Fun Fact</strong>: When not coding, I enjoy exploring music and diving into tech blogs.</li>
-            </ul>
-            <div class="text-center mt-8">
-                <a href="assets/Redwanshahriar.pdf" download class="px-6 py-3 bg-gray-700 rounded-full text-md font-semibold hover:bg-gray-600 hover-scale">Download CV</a>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">About Me</h2>
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="md:w-2/3">
+                    <p class="text-base md:text-lg leading-relaxed mb-6 fade-in" style="animation-delay: 0.4s;">
+                        I’m <strong class="text-orange-500">Redwan Shahriar Shubho</strong>, a Computer Science and Engineering student at <strong class="text-orange-500">North South University</strong>, Dhaka, Bangladesh. I’m passionate about leveraging <strong class="text-orange-500">AI</strong>, <strong class="text-orange-500">full-stack development</strong>, and <strong class="text-orange-500">mobile app development</strong> to solve real-world problems. My goal is to build scalable, impactful software solutions that drive innovation.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 fade-in" style="animation-delay: 0.6s;">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h3 class="font-semibold text-orange-500 mb-2">Interests</h3>
+                            <p class="text-sm">AI, Web Development, Mobile Apps, System Design</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h3 class="font-semibold text-orange-500 mb-2">Currently Learning</h3>
+                            <p class="text-sm">Flutter, Dart, Python, FastAPI, Cloud Technologies</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h3 class="font-semibold text-orange-500 mb-2">Ask Me About</h3>
+                            <p class="text-sm">MERN Stack, Flutter, Python, Git, WebSockets, API Development</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h3 class="font-semibold text-orange-500 mb-2">Fun Fact</h3>
+                            <p class="text-sm">I enjoy exploring music and diving into tech blogs when not coding.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 fade-in" style="animation-delay: 0.8s;">
+                        <a href="mailto:redwanshahriarshubho.1789@gmail.com" class="inline-flex items-center text-orange-500 hover:underline">
+                            <i class="fas fa-envelope mr-2"></i> redwanshahriarshubho.1789@gmail.com
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-orange-500 rounded-full blur-xl opacity-20"></div>
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Coding" class="w-64 h-64 rounded-lg object-cover relative z-10 hover-scale">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -84,62 +303,62 @@
     <!-- Skills Section -->
     <section id="skills" class="py-16 md:py-24 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">My Key Skills</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">My Key Skills</h2>
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4 md:gap-6 justify-items-center">
-                <!-- Repeat for each skill -->
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <!-- Skills with better hover effects -->
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">HTML5</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">CSS3</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="img/tailwind css.png" alt="Tailwind CSS" class="w-12 h-12 md:w-16 md:h-16 mb-2">
-                    <p class="text-sm md:text-base">Tailwind CSS</p>
+                    <p class="text-sm md:text-base">Tailwind</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">JavaScript</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">React</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Node.js</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" alt="Express.js" class="w-12 h-12 md:w-16 md:h-16 mb-2">
-                    <p class="text-sm md:text-base">Express.js</p>
+                    <p class="text-sm md:text-base">Express</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">MongoDB</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" alt="Firebase" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Firebase</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/fastapi/fastapi-original.svg" alt="FastAPI" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">FastAPI</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg" alt="Flutter" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Flutter</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Python</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg" alt="Dart" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Dart</p>
                 </div>
-                <div class="flex flex-col items-center bg-gray-800 rounded-xl p-4 hover-scale fade-in">
+                <div class="flex flex-col items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 hover-scale fade-in skill-icon">
                     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" alt="Git" class="w-12 h-12 md:w-16 md:h-16 mb-2">
                     <p class="text-sm md:text-base">Git</p>
                 </div>
@@ -148,48 +367,100 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-24 bg-gray-900 px-4">
+    <section id="projects" class="py-16 md:py-24 bg-gray-900/50 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">My Projects (Click to View)</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">My Projects</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Project 1 -->
-                <div class="bg-gray-800 rounded-lg overflow-hidden hover-scale fade-in">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden hover-scale fade-in project-card relative">
                     <img src="img/school17.png" alt="School-17" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg md:text-xl font-bold mb-2">School-17</h3>
                         <p class="text-gray-400 mb-2 text-sm">Edu is easy if u try</p>
-                        <p class="text-xs text-orange-500 mb-2">@Tech Stack</p>
-                        <a href="https://github.com/redwanshahriarshubho/School-17" target="_blank" class="text-orange-500 hover:underline text-sm">View on GitHub</a>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">Node.js</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">MongoDB</span>
+                        </div>
+                        <a href="https://github.com/redwanshahriarshubho/School-17" target="_blank" class="text-orange-500 hover:underline text-sm flex items-center">
+                            <i class="fab fa-github mr-1"></i> View on GitHub
+                        </a>
+                    </div>
+                    <div class="project-overlay">
+                        <h3 class="text-xl font-bold mb-2">School-17</h3>
+                        <p class="text-gray-300 mb-4">An educational platform designed to make learning accessible and engaging for students of all ages.</p>
+                        <a href="https://github.com/redwanshahriarshubho/School-17" target="_blank" class="px-4 py-2 bg-orange-500 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
                 </div>
                 <!-- Project 2 -->
-                <div class="bg-gray-800 rounded-lg overflow-hidden hover-scale fade-in">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden hover-scale fade-in project-card relative">
                     <img src="img/health nourish.jpg" alt="Health Nourish" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg md:text-xl font-bold mb-2">Health Nourish</h3>
                         <p class="text-gray-400 mb-2 text-sm">AI Health Nourish App</p>
-                        <p class="text-xs text-orange-500 mb-2">@New Tech</p>
-                        <a href="https://github.com/redwanshahriarshubho/redwanshahriarshubho-CSE499_Health_Nourish" target="_blank" class="text-orange-500 hover:underline text-sm">View on GitHub</a>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">Flutter</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">AI</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">Firebase</span>
+                        </div>
+                        <a href="https://github.com/redwanshahriarshubho/redwanshahriarshubho-CSE499_Health_Nourish" target="_blank" class="text-orange-500 hover:underline text-sm flex items-center">
+                            <i class="fab fa-github mr-1"></i> View on GitHub
+                        </a>
+                    </div>
+                    <div class="project-overlay">
+                        <h3 class="text-xl font-bold mb-2">Health Nourish</h3>
+                        <p class="text-gray-300 mb-4">An AI-powered health app that provides personalized nutrition recommendations and tracks your wellness journey.</p>
+                        <a href="https://github.com/redwanshahriarshubho/redwanshahriarshubho-CSE499_Health_Nourish" target="_blank" class="px-4 py-2 bg-orange-500 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
                 </div>
                 <!-- Project 3 -->
-                <div class="bg-gray-800 rounded-lg overflow-hidden hover-scale fade-in">
-                    <img src="https://via.placeholder.com/400x200?text=Project+3" alt="Hotel17" class="w-full h-48 object-cover">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden hover-scale fade-in project-card relative">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Hotel17" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg md:text-xl font-bold mb-2">Hotel17</h3>
-                        <p class="text-gray-400 mb-2 text-sm">Hotel Booking</p>
-                        <p class="text-xs text-orange-500 mb-2">@New Tech</p>
-                        <a href="https://github.com/redwanshahriarshubho/hotel17" target="_blank" class="text-orange-500 hover:underline text-sm">View on GitHub</a>
+                        <p class="text-gray-400 mb-2 text-sm">Hotel Booking Platform</p>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">Express</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">MongoDB</span>
+                        </div>
+                        <a href="https://github.com/redwanshahriarshubho/hotel17" target="_blank" class="text-orange-500 hover:underline text-sm flex items-center">
+                            <i class="fab fa-github mr-1"></i> View on GitHub
+                        </a>
+                    </div>
+                    <div class="project-overlay">
+                        <h3 class="text-xl font-bold mb-2">Hotel17</h3>
+                        <p class="text-gray-300 mb-4">A comprehensive hotel booking platform with real-time availability, secure payments, and user reviews.</p>
+                        <a href="https://github.com/redwanshahriarshubho/hotel17" target="_blank" class="px-4 py-2 bg-orange-500 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
                 </div>
                 <!-- Project 4 -->
-                <div class="bg-gray-800 rounded-lg overflow-hidden hover-scale fade-in">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden hover-scale fade-in project-card relative">
                     <img src="img/My portfolio17.png" alt="Portfolio" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg md:text-xl font-bold mb-2">My Portfolio</h3>
                         <p class="text-gray-400 mb-2 text-sm">Personal Portfolio</p>
-                        <p class="text-xs text-orange-500 mb-2">@New Tech</p>
-                        <a href="https://github.com/redwanshahriarshubho/T.M.Redwan-Shahriar-Shubho-17-Portfolio" target="_blank" class="text-orange-500 hover:underline text-sm">View on GitHub</a>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">HTML</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">CSS</span>
+                            <span class="text-xs bg-gray-700 px-2 py-1 rounded">JavaScript</span>
+                        </div>
+                        <a href="https://github.com/redwanshahriarshubho/T.M.Redwan-Shahriar-Shubho-17-Portfolio" target="_blank" class="text-orange-500 hover:underline text-sm flex items-center">
+                            <i class="fab fa-github mr-1"></i> View on GitHub
+                        </a>
+                    </div>
+                    <div class="project-overlay">
+                        <h3 class="text-xl font-bold mb-2">My Portfolio</h3>
+                        <p class="text-gray-300 mb-4">A responsive portfolio website showcasing my projects, skills, and professional journey.</p>
+                        <a href="https://github.com/redwanshahriarshubho/T.M.Redwan-Shahriar-Shubho-17-Portfolio" target="_blank" class="px-4 py-2 bg-orange-500 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors">
+                            View Project
+                        </a>
                     </div>
                 </div>
             </div>
@@ -199,33 +470,61 @@
     <!-- Education Section -->
     <section id="education" class="py-16 md:py-24 px-4">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">My Education</h2>
-            <div class="space-y-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">My Education</h2>
+            <div class="relative pl-8 border-l-2 border-gray-700">
                 <!-- Education Item 1 -->
-                <div class="bg-gray-800 rounded-lg p-6 flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6 hover-scale fade-in">
-                    <img src="img/North South university img.jpg" alt="NSU" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
-                    <div>
-                        <h3 class="text-xl md:text-2xl font-bold">BSc in Computer Science & Engineering</h3>
-                        <p class="text-base md:text-lg">North South University, Dhaka</p>
-                        <p class="text-sm text-gray-400">2020 - 2025 | Major in Machine Learning</p>
+                <div class="mb-10 relative timeline-dot">
+                    <div class="timeline-line"></div>
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 hover-scale fade-in">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <img src="img/North South university img.jpg" alt="NSU" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-bold">BSc in Computer Science & Engineering</h3>
+                                <p class="text-base md:text-lg">North South University, Dhaka</p>
+                                <p class="text-sm text-gray-400">2020 - 2025 | Major in Machine Learning</p>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">AI</span>
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Machine Learning</span>
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Data Structures</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Education Item 2 -->
-                <div class="bg-gray-800 rounded-lg p-6 flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6 hover-scale fade-in">
-                    <img src="img/MSSC img.jpg" alt="HSC" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
-                    <div>
-                        <h3 class="text-xl md:text-2xl font-bold">Higher Secondary Certificate</h3>
-                        <p class="text-base md:text-lg">Millennium Scholastic School & College, Bogura</p>
-                        <p class="text-sm text-gray-400">2019 | GPA: 4.67</p>
+                <div class="mb-10 relative timeline-dot">
+                    <div class="timeline-line"></div>
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 hover-scale fade-in">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <img src="img/MSSC img.jpg" alt="HSC" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-bold">Higher Secondary Certificate</h3>
+                                <p class="text-base md:text-lg">Millennium Scholastic School & College, Bogura</p>
+                                <p class="text-sm text-gray-400">2019 | GPA: 4.67</p>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Science</span>
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Physics</span>
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Mathematics</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Education Item 3 -->
-                <div class="bg-gray-800 rounded-lg p-6 flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6 hover-scale fade-in">
-                    <img src="img/MSSC img.jpg" alt="SSC" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
-                    <div>
-                        <h3 class="text-xl md:text-2xl font-bold">Secondary School Certificate</h3>
-                        <p class="text-base md:text-lg">Millennium Scholastic School & College, Bogura</p>
-                        <p class="text-sm text-gray-400">2017 | GPA: 4.67</p>
+                <div class="relative timeline-dot">
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 hover-scale fade-in">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <img src="img/MSSC img.jpg" alt="SSC" class="w-24 h-24 md:w-32 md:h-32 rounded-md flex-shrink-0">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-bold">Secondary School Certificate</h3>
+                                <p class="text-base md:text-lg">Millennium Scholastic School & College, Bogura</p>
+                                <p class="text-sm text-gray-400">2017 | GPA: 4.67</p>
+                                <div class="mt-2 flex flex-wrap gap-2">
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">Science</span>
+                                    <span class="text-xs bg-gray-700 px-2 py-1 rounded">General Knowledge</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,12 +532,21 @@
     </section>
 
     <!-- GitHub Stats Section -->
-    <section id="github" class="py-16 md:py-24 bg-gray-900 px-4">
+    <section id="github" class="py-16 md:py-24 bg-gray-900/50 px-4">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">GitHub Stats & Activity</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">GitHub Stats & Activity</h2>
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12">
-                <img src="https://github-readme-stats.vercel.app/api?username=redwanshahriarshubho&show_icons=true&theme=dracula&count_private=true" alt="GitHub Stats" class="w-full max-w-md md:max-w-none hover-scale fade-in">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=redwanshahriarshubho&layout=compact&theme=dracula" alt="Top Languages" class="w-full max-w-md md:max-w-none hover-scale fade-in">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-4 rounded-lg hover-scale fade-in">
+                    <img src="https://github-readme-stats.vercel.app/api?username=redwanshahriarshubho&show_icons=true&theme=dracula&count_private=true" alt="GitHub Stats" class="w-full max-w-md md:max-w-none">
+                </div>
+                <div class="bg-gray-800/50 backdrop-blur-sm p-4 rounded-lg hover-scale fade-in">
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=redwanshahriarshubho&layout=compact&theme=dracula" alt="Top Languages" class="w-full max-w-md md:max-w-none">
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <a href="https://github.com/redwanshahriarshubho" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-800 rounded-full text-base font-semibold hover:bg-gray-700 hover-scale transition-all">
+                    <i class="fab fa-github mr-2"></i> Visit My GitHub Profile
+                </a>
             </div>
         </div>
     </section>
@@ -246,29 +554,112 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16 md:py-24 px-4">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-orange-500">Get in Touch - Let's Connect</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 gradient-text">Get in Touch</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                <form class="space-y-6 fade-in" onsubmit="alert('Message sent! (Demo)'); return false;">
-                    <input type="text" placeholder="Your name" class="w-full p-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-orange-500 outline-none transition-colors">
-                    <input type="email" placeholder="Your email" class="w-full p-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-orange-500 outline-none transition-colors">
-                    <textarea placeholder="Your message or question" class="w-full p-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-orange-500 outline-none transition-colors h-32"></textarea>
-                    <button type="submit" class="w-full px-8 py-4 bg-orange-500 rounded-full text-lg font-semibold hover:bg-orange-600 hover-scale">Send Message</button>
-                </form>
-                <div class="flex justify-center fade-in">
-                    <img src="https://via.placeholder.com/300x300?text=Let's+Connect" alt="Contact Illustration" class="w-full max-w-xs md:max-w-sm rounded-lg hover-scale">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg fade-in">
+                    <h3 class="text-xl font-bold mb-6">Send me a message</h3>
+                    <form class="space-y-6" onsubmit="alert('Message sent! (Demo)'); return false;">
+                        <div>
+                            <input type="text" placeholder="Your name" class="w-full p-4 bg-gray-700 rounded-lg border border-gray-600 focus:border-orange-500 outline-none transition-colors">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your email" class="w-full p-4 bg-gray-700 rounded-lg border border-gray-600 focus:border-orange-500 outline-none transition-colors">
+                        </div>
+                        <div>
+                            <textarea placeholder="Your message or question" class="w-full p-4 bg-gray-700 rounded-lg border border-gray-600 focus:border-orange-500 outline-none transition-colors h-32 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-8 py-4 bg-orange-500 rounded-full text-lg font-semibold hover:bg-orange-600 hover-scale transition-all">
+                            Send Message
+                        </button>
+                    </form>
                 </div>
-            </div>
-            <div class="mt-12 text-center space-x-6">
-                <a href="https://www.linkedin.com/in/redwan-shahriar-shubho-799532240/" target="_blank" class="text-orange-500 hover:text-orange-400 text-xl"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="mailto:redwanshahriarshubho.1789@gmail.com" class="text-orange-500 hover:text-orange-400 text-xl"><i class="fas fa-envelope"></i> Email</a>
-                <a href="https://github.com/redwanshahriarshubho" target="_blank" class="text-orange-500 hover:text-orange-400 text-xl"><i class="fab fa-github"></i> GitHub</a>
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-orange-500 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-gray-400">redwanshahriarshubho.1789@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-orange-500 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Location</h4>
+                                <p class="text-gray-400">Dhaka, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-orange-500 p-3 rounded-full mr-4">
+                                <i class="fab fa-linkedin text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">LinkedIn</h4>
+                                <p class="text-gray-400">linkedin.com/in/redwan-shahriar-shubho</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <img src= alt="Contact" class="w-full rounded-lg hover-scale">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-6 text-center text-gray-500 bg-gray-900 text-sm">
-        © 2025 Redwan Shahriar Shubho. All rights reserved.
+    <footer class="py-8 text-center text-gray-500 bg-gray-900/80 backdrop-blur-sm text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 Redwan Shahriar Shubho. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="https://www.linkedin.com/in/redwan-shahriar-shubho-799532240/" target="_blank" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:redwanshahriarshubho.1789@gmail.com" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                    <a href="https://github.com/redwanshahriarshubho" target="_blank" class="text-gray-400 hover:text-orange-500 transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+        
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
 </body>
 </html>
